@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/main/another-page.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="divv">
+        <% if (!user) { %>
+            <a href="/main" class="main"><img src="/pict/qwe1.png" class="img"></a>
+            <% } else { %>
+                <a href="/main?userId=<%= user.id %>" class="main"><img src="/pict/qwe1.png" class="img"></a>
+                <% } %>
+                    <h1>ADMINPANEL</h1>
+                    <h1 class="newss">Новости</h1>
+                    <br>
+
+                    <% for (let item of news) {%>
+                        <label class="textt">ID Новости</label>
+                        <%=item.id %>
+                            <label class="textt">Описание</label>
+                            <%= item.description %>
+                                <label class="textt">ID Артиста</label>
+                                <%= item.idartist %>
+                                    <br>
+                                    <% }; %>
+                                        <br>
+                                        <h3>Добавление новости</h3>
+                                        <form action="/main/create-news" method="POST">
+                                            <label for="help">Описание новости</label>
+                                            <input type="text" name="help" id="help" class="bigI"><br>
+                                            <label for="idartist">ID артиста</label>
+                                            <input type="text" name="idartist" id="idartist"><br>
+                                            <button type="submit">Добавить</button>
+                                        </form>
+                                        <br>
+
+
+
+                                        <h3>Обновление новости</h3>
+                                        <form action="/main/update-news" method="POST">
+                                            <label for="id">ID изменяемой новости</label>
+                                            <input type="text" name="id" id="id"><br>
+                                            <label for="update">Описание новости</label>
+                                            <input type="text" name="update" id="update" class="bigI"><br>
+                                            <label for="idartistnew">ID артиста</label>
+                                            <input type="text" name="idartistnew" id="idartistnew"><br><br>
+                                            <button type="submit">Обновить</button>
+
+                                        </form>
+                                        <br>
+                                        <h3>Удаление новости</h3>
+                                        <form action="/main/delete-news" method="POST">
+                                            <label for="id">ID удаляемой новости</label>
+                                            <input type="text" name="iddel" id="iddel"><br>
+
+                                            <button type="submit">Удалить</button>
+
+                                        </form>
+                                        <br>
+
+                                        <a href="/main/artist">Artist</a>
+                                        <a href="/main/shmot">Shmot</a>
+
+    </div>
+</body>
+
+</html>

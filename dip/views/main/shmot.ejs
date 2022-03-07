@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+
+
+
+    <form action="/main/addshmot" method="POST" enctype="multipart/form-data">
+        <select>
+            <% for (let item of artist) {%>
+            <option> <%= item.id%>
+                <%= item.name %></option>
+                <% }; %>
+        </select><br> id Артиста <input type="number" name="idartist" id="idartist" required>
+        <br> Название <input type="text" name="name" id="name" required><br> Содержание <input type="text" name="content" id="content" required><br> Количество <input type="number" name="kol" id="kol" required>
+
+        <br> Цена <input type="number" name="cost" id="cost" required>
+        <br> Картинка <input type="file" id="avatar" placeholder="Enter avatar" name="avatar" required> Популярный <input type="checkbox" name="popular" id="popular"><br> Белый <input type="checkbox" name="white" id="white"><br> Черный <input type="checkbox"
+            name="black" id="black">
+        <br> Красный <input type="checkbox" name="red" id="red">
+        <br> Серый <input type="checkbox" name="grey" id="grey"> <br> желтый <input type="checkbox" name="yel" id="yel"><br> голубой <input type="checkbox" name="blue" id="blue"><br> xxs
+        <input type="checkbox" name="xxs" id="xxs"><br> xs <input type="checkbox" name="xs" id="xs"><br> s <input type="checkbox" name="s" id="s"><br> m <input type="checkbox" name="m" id="m"><br> l <input type="checkbox" name="l" id="l"><br> xl
+        <input type="checkbox" name="xl" id="xl"><br> xxl
+        <input type="checkbox" name="xxl" id="xxl"><br> xxxl <input type="checkbox" name="xxxl" id="xxxl"><br>
+        <input type="submit" name="update" id="update"> </form>
+    <a href="/">main</a>
+</body>
+
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shmotki</title>
+    <link rel="stylesheet" href="zakaz.css">
+</head>
+
+<body>
+    <div class="header">
+        <img class="logo" src="/pict/qwe1.png">
+        <% if (!user) { %>
+            <a href="/main/another-page">
+                <h1 class="fir">SHMOTKI</h1>
+            </a>
+            <% } else { %>
+                <a href="/main/another-page?userId=<%= user.id %>">
+                    <h1 class="fir">SHMOTKI</h1>
+                </a>
+                <% } %>
+
+                    <div class="akk">
+                        <% if (!user) { %>
+                            <a href="/main/reg"> <img class="akkk" src="/pict/account-circle-line 1.png"></a>
+                            <% } else { %>
+                                <div class="text123">
+
+                                    <a class="hrefpr" href="/main/profile?userId=<%= user.id %>">
+
+                                        <% if(!user.name2){ %>
+                                            <%= user.login %>
+                                                <% }else{ %>
+                                                    <%= user.name2 %>
+                                                        <% } %>
+
+                                    </a>
+
+                                </div>
+                                <% } %>
+                                    <% if (!user) { %>
+                                        <a href="/main/reg"> <img class="korz" src="/pict/korz.png"></a>
+                                        <% } else { %>
+                                            <a href="/main/korzina?userId=<%= user.id %>"><img class="korz" src="/pict/korz.png"></a>
+                                            <% } %>
+                    </div>
+
+    </div>
+
+    <div class="nav">
+        <div class="main">
+            <% if (!user) { %>
+                <a href="/main" class="hrefmain">
+                    <h1 class="nav1">ГЛАВНАЯ</h1>
+                </a>
+                <a href="/main/menart?raz=m" class="hrefmain">
+                    <h1 class="nav2">МУЖСКОЕ</h1>
+                </a>
+                <a href="/main/menart?raz=j" class="hrefmain">
+                    <h1 class="nav3">ЖЕНСКОЕ</h1>
+                </a>
+                <% } else { %>
+                    <a href="/main?userId=<%= user.id %>" class="hrefmain">
+                        <h1 class="nav1">ГЛАВНАЯ</h1>
+                    </a>
+                    <a href="/main/menart?userId=<%= user.id %>&raz=m" class="hrefmain">
+                        <h1 class="nav2">МУЖСКОЕ</h1>
+                    </a>
+                    <a href="/main/menart?userId=<%= user.id %>&raz=j" class="hrefmain">
+                        <h1 class="nav3">ЖЕНСКОЕ</h1>
+                    </a>
+                    <% } %>
+
+
+
+        </div>
+        <div class="cap">
+            <h1 class="nav21">
+                Оформление заказа
+            </h1>
+        </div>
+        <div class="sear">
+            <textarea class="textsear" id="textsear" placeholder="Поиск..."></textarea>
+            <img class="qwe" src="/pict/Group 509.png">
+        </div>
+    </div>
+    <div class="elem">
+        <% if(!idshmot) { %>
+            <form action="/main/oformzakaz?sh=<%= idshmot %>&userId=<%= user.id %>" method="post">
+                <% }else { %>
+                    <form action="/main/oformzakaz?sh=<%= idshmot %>&userId=<%= user.id %>" method="post">
+                        <% } %>
+
+
+                            <div class="tovari">Заказ</div>
+                            <div class="adres">
+                                Адрес доставки
+                                <%= shmot[1].name %>
+                                    <div class="itemss">
+                                        <div>
+                                            Улица: <input type="text" id="street" name="street"> Дом: <input type="text" id="dom" name="dom"> Квартира: <input type="text" id="kv" name="kv"></div>
+                                        <div> Страна: <input type="text" id="country" name="country"> Индекс: <input type="text" id="index" name="index"> Город:<input type="text" id="gorod" name="gorod"> </div>
+                                        <div class="nomer">Введите номер телефона: <input type="tel" id="tel" name="tel" placeholder="+375(22)3334455" required pattern='\s{0,}\+{1,1}375\s{0,}\({0,1}(([2]{1}([5]{1}|[9]{1}))|([3]{1}[3]{1})|([4]{1}[4]{1}))\)\s{0,}[0-9]{3,3}\s{0,}[0-9]{4,4}'></div>
+
+                                    </div>
+                            </div>
+                            <% let k=0 %>
+
+                                <% for(let i of korz) { %>
+                                    <% for(let item of shmot){ %>
+                                        <% if(i.idshmot==item.id){ %>
+                                            <% let t=item.cost %>
+                                                <% let y=i.kol %>
+                                                    <div class="elem-elem">
+                                                        <img class="pict" src="/shmot/<%=item.picture %>">
+                                                        <div class="all gold">
+                                                            <%= item.name %>
+                                                                <div class="alll">
+                                                                    Цвет:
+                                                                    <div class="gold">
+                                                                        <%= i.cl %>
+                                                                    </div>
+                                                                    Размер:
+                                                                    <div class="gold">
+                                                                        <%= i.rz %>
+                                                                    </div>
+                                                                    Цена:
+                                                                    <div class="gold">
+                                                                        <%= item.cost*i.kol %> BYN
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                    <% k+=t*y%>
+
+                                                        <% } %>
+                                                            <% } %>
+                                                                <% } %>
+                                                                    <div class="fio">
+                                                                        Заказ оформлен на:
+                                                                        <input type="text" id="name1" name="name1" class="infio" required>
+                                                                        <input type="text" id="name2" name="name2" class="infio" required>
+                                                                        <input type="text" id="name3" name="name3" class="infio" required> Оплата: наложенный платёж
+                                                                    </div>
+                                                                    <button type="submit" class="zakazbtn">Оформить заказ/сумма <%=k %> BYN</button>
+                    </form>
+    </div>
+
+
+
+    <script>
+        document.getElementById('country').value = "<%= user.country %>";
+        document.getElementById('name1').value = "<%= user.name1%>";
+        document.getElementById('name2').value = "<%= user.name2%>";
+        document.getElementById('name3').value = "<%= user.name3%>";
+        document.getElementById('gorod').value = "<%= user.gorod %>";
+        document.getElementById('kv').value = "<%= user.kv %>";
+        document.getElementById('dom').value = "<%= user.dom %>";
+        document.getElementById('street').value = "<%= user.street %>";
+        document.getElementById('index').value = "<%= user.tel %>";
+    </script>
+
+
+
+
+
+
+
+
+    <div class="footer">
+        <div class="about">
+            <div class="info">
+                <h1 class="gold">Информация</h1>
+
+                <div>Как сделать заказ?</div>
+                <div>Доставка</div>
+                <div>Обмен и возврат</div>
+                <div>Способы оплаты</div>
+                <div>Юридическая Информация</div>
+            </div>
+            <div class="service">
+                <div class="ser">
+                    <h1 class="gold">О компании</h1>
+                    <div>О нас</div>
+                    <div>Контакты</div>
+                    <div>Вакансии</div>
+
+                </div>
+            </div>
+            <div class="out">
+                <div class="ouut">
+                    <h1 class="gold">Сотрудничество</h1>
+                    <div>Оптовым клиентам</div>
+                    <div>Дизайнерам</div>
+                    <div>Партнерская программа</div>
+                    <div>Корпоративным клиентам</div>
+                </div>
+            </div>
+            <div class="we">
+                <div class="wee">
+                    <h1 class="gold">Свяжитесь с нами</h1>
+                    <div>shmotki@yandex.by </div>
+                    <div>+375 33 333-33-33</div>
+
+                </div>
+            </div>
+            <div class="follow">
+                <div class="folow">
+                    <h1 class="gold cos">Мы в Соц-сетях</h1>
+                    <div class="share">
+                        <div><img src="/pict/twitter-fill 1.png"></div>
+                        <div><img src="/pict/instagram-fill 1.png"></div>
+                        <div><img src="/pict/facebook-fill 1.png"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="desc">
+
+                <h1> © 2018 Ecommerce theme by www.bisenbaev.com</h1>
+
+            </div>
+            <div class="icon">
+                <div><img src="/pict/Western-union.png"></div>
+                <div><img src="/pict/master.png"></div>
+                <div><img src="/pict/visa.png"></div>
+                <div><img src="/pict//Paypal.png"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
